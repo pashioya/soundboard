@@ -1,0 +1,48 @@
+{
+  "soundboards": [
+    {
+      "id": 1,
+      "name": "Animals",
+      "description": "Animal sounds Galore! your gonna love this whether you like it or not!"
+    },
+    {
+      "id": 2,
+      "name": "Movie Characters",
+      "description": "Movie Characters from all your favorite movies!"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "soundboardId": 1,
+      "name": "Cow",
+      "image": "images/cow.jpeg",
+      "sound": "audios/moo.mp3",
+      "spokenText": "MOO!"
+    },
+    {
+      "id": 2,
+      "soundboardId": 1,
+      "name": "Goat",
+      "image": "images/goat.jpeg",
+      "sound": "audios/bleat.mp3",
+      "spokenText": "MeHHHH!"
+    },
+    {
+      "id": 3,
+      "soundboardId": 2,
+      "name": "Darth Vader",
+      "image": "images/darth-vader.jpeg",
+      "sound": "audios/darth-vader.mp3",
+      "spokenText": "I am your father."
+    },
+    {
+      "id": 4,
+      "soundboardId": 2,
+      "name": "JonTron",
+      "image": "images/JonTron.jpeg",
+      "sound": "audios/JonTron.mp3",
+      "spokenText": "Stranger Danger"
+    }
+  ]
+}
