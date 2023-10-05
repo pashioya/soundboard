@@ -5,9 +5,10 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 import plusSign from "/src/assets/plus-sign.svg";
-import {Item} from "../Types";
+import { Item } from "../Types";
+import axios from "axios";
 
-function NewItemModal(props: { addItem: (newItem: Item) => void }) {
+function NewItemModal() {
     const [name] = useState("");
     const [image] = useState("");
     const [sound] = useState("");
@@ -23,13 +24,19 @@ function NewItemModal(props: { addItem: (newItem: Item) => void }) {
             sound: sound,
             spokenText: spokenText,
         };
-        props.addItem(newItem);
+        addItem(newItem);
     };
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    function addItem(newItem: Item) {
+        axios.post("/items", newItem).then((response) => {
+            console.log(response.data);
+        });
+    }
 
     return (
         <>

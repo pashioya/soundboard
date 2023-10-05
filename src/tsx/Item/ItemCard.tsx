@@ -1,29 +1,33 @@
-import {Item} from "../Types";
+import { Item } from "../Types";
+import { useState } from "react";
 
 function ItemCard(props: {
     item: Item;
-    isPlaying: boolean;
     displayItemName: boolean;
     displaySpokenText: boolean;
     selected: boolean;
-    playSound: () => void;
     removeItem: () => void;
 }) {
-    const {
-        item,
-        isPlaying,
-        displayItemName,
-        displaySpokenText,
-        selected,
-        playSound,
-        removeItem,
-    } = props;
+    const { item, displayItemName, displaySpokenText, selected, removeItem } =
+        props;
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    function playSound(sound: string) {
+        const audio = new Audio(sound);
+        // if the sound is already playing, do nothing
+        if (isPlaying) return;
+        setIsPlaying(true);
+        audio.play();
+        audio.onended = () => {
+            setIsPlaying(false);
+        };
+    }
 
     return (
         <div
             className={`col ${selected ? "enlarge" : ""}`}
             id={item.id!.toString()}
-            onClick={playSound}
+            onClick={() => playSound(item.sound)}
         >
             <div className="card shadow-sm pointer">
                 <img

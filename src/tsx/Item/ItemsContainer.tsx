@@ -1,28 +1,56 @@
 import ItemCard from "./ItemCard";
-import {Item} from "../Types";
+import { useState, useEffect } from "react";
+import { Item } from "../Types";
+import { Soundboard } from "../Types";
+import axios from "axios";
 
 interface ItemsContainerProps {
-    items: Item[] | null;
-    isPlaying: boolean;
+    selectedSoundBoard: Soundboard | null;
     displayItemName: boolean;
     displaySpokenText: boolean;
-    selectedItemId: number | null;
-    playSound: (sound: string, itemId: number) => void;
     removeItem: (itemId: number | null) => void;
 }
 
 function ItemsContainer(props: ItemsContainerProps) {
     const {
-        items,
-        isPlaying,
+        selectedSoundBoard,
         displayItemName,
         displaySpokenText,
-        selectedItemId,
-        playSound,
         removeItem,
     } = props;
 
+    const [items, setItems] = useState<Item[] | null>(null);
+    const [selectedItemId] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
+    useEffect(() => {
+        let items: Item[] = [];
+        async function getItemsBySoundBoardId() {
+            try {
+                const response = await axios.get<Item[]>("/items");
+                items = response.data.filter(
+                    (item: Item) => item.soundboardId === selectedSoundBoard?.id
+                );
+            } catch (error) {
+                setIsError(true);
+            }
+            setIsLoading(false);
+            if (isLoading || !items) {
+                return <div>Loading...</div>;
+            }
+
+            if (isError) {
+                return <div>Error...</div>;
+            }
+            setItems(items);
+        }
+        if (selectedSoundBoard) {
+            getItemsBySoundBoardId();
+        } else {
+            setItems(null); // Set items to null if soundboard is not selected
+        }
+    }, [isLoading, isError, selectedSoundBoard]);
 
     return (
         <div className="container">
@@ -31,13 +59,9 @@ function ItemsContainer(props: ItemsContainerProps) {
                     <ItemCard
                         key={item.id!}
                         item={item}
-                        isPlaying={isPlaying}
                         displayItemName={displayItemName}
                         displaySpokenText={displaySpokenText}
                         selected={selectedItemId === item.id!.valueOf()}
-                        playSound={() =>
-                            playSound(item.sound, item.id!.valueOf())
-                        }
                         removeItem={() => removeItem(item.id)}
                     />
                 ))}

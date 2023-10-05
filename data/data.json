@@ -26,7 +26,7 @@
       "name": "Goat",
       "image": "images/goat.jpeg",
       "sound": "audios/bleat.mp3",
-      "spokenText": "MeHHHH!"
+      "spokenText": "Meow!"
     },
     {
       "id": 3,
