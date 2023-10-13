@@ -1,14 +1,10 @@
-import { Item } from "../Types";
 import { useState } from "react";
-
+import { Item } from "../../model/Item.ts";
+import { deleteItem } from "../services/ItemDataService.ts";
 function ItemCard(props: {
     item: Item;
-    displayItemName: boolean;
-    displaySpokenText: boolean;
-    selected: boolean;
-    removeItem: () => void;
 }) {
-    const { item, displayItemName, displaySpokenText, selected, removeItem } =
+    const { item} =
         props;
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -25,15 +21,12 @@ function ItemCard(props: {
 
     return (
         <div
-            className={`col ${selected ? "enlarge" : ""}`}
             id={item.id!.toString()}
             onClick={() => playSound(item.sound)}
         >
             <div className="card shadow-sm pointer">
                 <img
-                    className={`bd-placeholder-img card-img-top object-fit-cover ${
-                        selected ? "enhance" : ""
-                    }`}
+                    className={`bd-placeholder-img card-img-top object-fit-cover`}
                     src={item.image}
                     alt=""
                     width="100%"
@@ -42,14 +35,11 @@ function ItemCard(props: {
                     aria-label="Placeholder: Thumbnail"
                 />
                 <div className="card-body">
-                    <p className={`item ${displayItemName ? "" : "hidden"}`}>
+                    <p >
                         {item.name}
                     </p>
                     <div className={`item ${isPlaying ? "" : "hidden"}`}>
                         <p
-                            className={`spoken-text ${
-                                displaySpokenText ? "" : "hidden"
-                            }`}
                         >
                             {item.spokenText}
                         </p>
@@ -60,13 +50,13 @@ function ItemCard(props: {
                             <button
                                 type="button"
                                 className="btn btn-sm btn-outline-danger"
-                                onClick={removeItem}
+                                onClick={() => deleteItem(item.id!)}
                             >
                                 Delete
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-sm btn-outline-secondary"
+                                className="btn btn-sm btn-outline-secondary disabled"
                             >
                                 Edit
                             </button>

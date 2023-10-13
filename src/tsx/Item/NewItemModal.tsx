@@ -5,8 +5,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 import plusSign from "/src/assets/plus-sign.svg";
-import { Item } from "../Types";
 import axios from "axios";
+import { Item } from "../../model/Item.ts";
 
 function NewItemModal() {
     const [name] = useState("");

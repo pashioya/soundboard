@@ -6,10 +6,3 @@ export interface Item {
     sound: string;
     spokenText: string;
 }
-
-export interface Soundboard {
-    id: number | null;
-    name: string;
-    description: string;
-    items: Item[] | null;
-}

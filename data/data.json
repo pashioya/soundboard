@@ -9,6 +9,31 @@
       "id": 2,
       "name": "Movie Characters",
       "description": "Movie Characters from all your favorite movies!"
+    },
+    {
+      "id": 3,
+      "name": "Garbage",
+        "description": "Garbage sounds for Garbage people"
+    },
+    {
+      "id": 4,
+      "name": "Musicians",
+        "description": "Musicians from all your favorite bands!"
+    },
+    {
+      "id": 5,
+      "name": "Rats",
+        "description": "Rats from all your favorite bands!"
+    },{
+      "id": 6,
+      "name": "Anime",
+        "description": "Anime from all your favorite bands!"
+    },
+    {
+      "id": 7,
+      "name": "Mexicans",
+        "description": "Mexicans from all your favorite bands!"
+
     }
   ],
   "items": [
@@ -16,32 +41,32 @@
       "id": 1,
       "soundboardId": 1,
       "name": "Cow",
-      "image": "images/cow.jpeg",
-      "sound": "audios/moo.mp3",
+      "image": "/images/cow.jpeg",
+      "sound": "/audios/moo.mp3",
       "spokenText": "MOO!"
     },
     {
       "id": 2,
       "soundboardId": 1,
       "name": "Goat",
-      "image": "images/goat.jpeg",
-      "sound": "audios/bleat.mp3",
+      "image": "/images/goat.jpeg",
+      "sound": "/audios/bleat.mp3",
       "spokenText": "Meow!"
     },
     {
       "id": 3,
       "soundboardId": 2,
       "name": "Darth Vader",
-      "image": "images/darth-vader.jpeg",
-      "sound": "audios/darth-vader.mp3",
+      "image": "/images/darth-vader.jpeg",
+      "sound": "/audios/darth-vader.mp3",
       "spokenText": "I am your father."
     },
     {
       "id": 4,
       "soundboardId": 2,
       "name": "JonTron",
-      "image": "images/JonTron.jpeg",
-      "sound": "audios/JonTron.mp3",
+      "image": "/images/JonTron.jpeg",
+      "sound": "/audios/JonTron.mp3",
       "spokenText": "Stranger Danger"
     }
   ]

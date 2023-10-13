@@ -1,8 +1,11 @@
 import { Button } from "react-bootstrap";
-import {Soundboard} from "../Types";
+import { Board } from "../../model/Board";
 
-function Header({ soundboard }: { soundboard: Soundboard | null }) {
-    if (!soundboard) {
+
+
+
+function Header({ soundBoard }: { soundBoard: Board | null }) {
+    if (!soundBoard) {
         return (
             <section className="py-5 text-center container">
                 <div className="row py-lg-5">
@@ -16,13 +19,14 @@ function Header({ soundboard }: { soundboard: Soundboard | null }) {
             </section>
         );
     }
+    else
     return (
         <section className="py-5 text-center container">
             <div className="row py-lg-5">
                 <div className="col-lg-6 col-md-8 mx-auto">
-                    <h1 className="fw-light">{soundboard.name}</h1>
+                    <h1 className="fw-light">{soundBoard.name}</h1>
                     <p className="lead text-body-secondary">
-                        {soundboard.description}
+                        {soundBoard.description}
                     </p>
                     <p>
                         <Button variant="danger">Delete</Button>
