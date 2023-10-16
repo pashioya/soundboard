@@ -11,4 +11,7 @@ export const getBoardById = async (id: string) => {
     return board.data
 }
 
+export const deleteBoard = async (id: string) => {
+    await axios.delete(`/soundboards/${id}`)
+}
 

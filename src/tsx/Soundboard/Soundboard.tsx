@@ -1,13 +1,13 @@
 import ItemCard from "../Item/ItemCard";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Item } from "../../model/Item";
 import { Board } from "../../model/Board";
 import { useParams } from "react-router-dom";
 import Header from "../UI/Header";
 import CustomNavBar from "../UI/CustomNavBar";
-
-
+import NewItemModal from "../Item/NewItemModal";
+import { getItemsByBoardId } from "../services/ItemDataService";
+import { getBoardById } from "../services/BoardDataService";
 
 function Soundboard() {
     const [items, setItems] = useState<Item[] | null>(null);
@@ -18,44 +18,27 @@ function Soundboard() {
 
     useEffect(() => {
         let items: Item[] = [];
-        async function getItemsBySoundBoardId() {
-            try {
-                const response = await axios.get<Item[]>("/soundboards/" + id + "/items");
-                items = response.data;
-            } catch (error) {
-                setIsError(true);
-            }
-            setIsLoading(false);
-            if (isLoading || !items) {
-                return <div>Loading...</div>;
-            }
-
-            if (isError) {
-                return <div>Error...</div>;
-            }
+        getItemsByBoardId(id!).then((response: Item[]) => {
+            items = response;
             setItems(items);
+        }).catch((error: any) => {
+            setIsError(true);
+            console.log(error);
         }
-        getItemsBySoundBoardId();
+        );
     }, [isLoading, isError, items]);
 
     useEffect(() => {
-        async function getSoundboard() {
-            try {
-                const response = await axios.get("/soundboards/" + id);
-                setSoundBoard(response.data);
-            } catch (error) {
-                setIsError(true);
-            }
+        let soundBoard: Board | null = null;
+        getBoardById(id!).then((response: Board) => {
+            soundBoard = response;
+            setSoundBoard(soundBoard);
             setIsLoading(false);
-            if (isLoading || !items) {
-                return <div>Loading...</div>;
-            }
-
-            if (isError) {
-                return <div>Error...</div>;
-            }
         }
-        getSoundboard();
+        ).catch((error: any) => {
+            setIsError(true);
+            console.log(error);
+        });
     }, []);
 
     return (
@@ -70,6 +53,7 @@ function Soundboard() {
                     />
                 ))}
             </div>
+            <NewItemModal />
         </div>
     );
 }

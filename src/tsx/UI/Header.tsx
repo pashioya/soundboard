@@ -29,7 +29,7 @@ function Header({ soundBoard }: { soundBoard: Board | null }) {
                         {soundBoard.description}
                     </p>
                     <p>
-                        <Button variant="danger">Delete</Button>
+                        <Button disabled variant="danger">Delete</Button>
                     </p>
                 </div>
             </div>
